@@ -41,9 +41,13 @@ namespace TrvxTask.Services
             await _postRepository.UpdateAsync(post);
         }
 
-        public async Task DeleteAsync(Post post)
+        public async Task DeleteAsync(Guid id)
         {
-            await _postRepository.DeleteAsync(post);
+            var post = await _postRepository.GetAsync(id);
+            if (post != null)
+            {
+                await _postRepository.DeleteAsync(post);
+            }
         }
     }
 }

@@ -67,8 +67,7 @@ namespace TrvxTask.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var post = await _commentService.GetAsync(id);
-            await _commentService.DeleteAsync(post);
+            await _commentService.DeleteAsync(id);
             return Ok();
         }
     }

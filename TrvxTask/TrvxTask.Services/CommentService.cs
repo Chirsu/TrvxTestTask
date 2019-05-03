@@ -41,9 +41,13 @@ namespace TrvxTask.Services
             await _commentRepository.UpdateAsync(comment);
         }
 
-        public async Task DeleteAsync(Comment comment)
+        public async Task DeleteAsync(Guid id)
         {
-            await _commentRepository.DeleteAsync(comment);
+            var comment = await _commentRepository.GetAsync(id);
+            if (comment != null)
+            {
+                await _commentRepository.DeleteAsync(comment);
+            }
         }
     }
 }

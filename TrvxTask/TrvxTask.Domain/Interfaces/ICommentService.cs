@@ -12,6 +12,6 @@ namespace TrvxTask.Domain.Interfaces
         Task<Comment> GetAsync(Guid id);
         Task InsertAsync(Comment comment);
         Task UpdateAsync(Comment comment);
-        Task DeleteAsync(Comment comment);
+        Task DeleteAsync(Guid id);
     }
 }

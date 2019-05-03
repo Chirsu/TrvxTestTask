@@ -48,9 +48,9 @@ namespace TrvxTask.Test.Fakes
             _posts.Add(post);
         }
 
-        public async Task DeleteAsync(Post post)
+        public async Task DeleteAsync(Guid id)
         {
-            _posts.RemoveAll(x => x.Id == post.Id);
+            _posts.RemoveAll(x => x.Id == id);
         }
     }
 }

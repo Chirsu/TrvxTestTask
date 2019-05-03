@@ -12,6 +12,6 @@ namespace TrvxTask.Domain.Interfaces
         Task<Post> GetAsync(Guid id);
         Task InsertAsync(Post post);
         Task UpdateAsync(Post post);
-        Task DeleteAsync(Post post);
+        Task DeleteAsync(Guid id);
     }
 }
