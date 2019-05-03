@@ -12,12 +12,12 @@ namespace TrvxTask.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CommentController : Controller
+    public class CommentsController : Controller
     {
         private readonly IMapper _mapper;
         private readonly ICommentService _commentService;
 
-        public CommentController(IMapper mapper, ICommentService commentService)
+        public CommentsController(IMapper mapper, ICommentService commentService)
         {
             _mapper = mapper;
             _commentService = commentService;

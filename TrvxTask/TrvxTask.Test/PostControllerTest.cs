@@ -17,7 +17,7 @@ namespace TrvxTask.Test
     [TestClass]
     public class PostControllerTest
     {
-        private readonly PostController _controller;
+        private readonly PostsController _controller;
         private readonly IPostService _service;
 
         public PostControllerTest()
@@ -27,7 +27,7 @@ namespace TrvxTask.Test
             var mapper = new Mapper(configuration);
 
             _service = new PostServiceFake();
-            _controller = new PostController(mapper, _service);
+            _controller = new PostsController(mapper, _service);
         }
 
         [TestMethod]

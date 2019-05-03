@@ -12,12 +12,12 @@ namespace TrvxTask.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostController : Controller
+    public class PostsController : Controller
     {
         private readonly IMapper _mapper;
         private readonly IPostService _postService;
 
-        public PostController(IMapper mapper, IPostService postService)
+        public PostsController(IMapper mapper, IPostService postService)
         {
             _mapper = mapper;
             _postService = postService;
