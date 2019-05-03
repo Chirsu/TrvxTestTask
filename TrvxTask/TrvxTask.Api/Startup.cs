@@ -34,10 +34,8 @@ namespace TrvxTask.Api
         {
             services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;ConnectRetryCount=0";
-            services.AddDbContext<ApplicationDbContext>
-                (options => options.UseSqlServer(connection));
+            
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TrvxTaskDatabase")));
             services.AddTransient<ICommentRepository, CommentRepository>();
             services.AddTransient<IPostRepository, PostRepository>();
             services.AddTransient<ICommentService, CommentService>();
