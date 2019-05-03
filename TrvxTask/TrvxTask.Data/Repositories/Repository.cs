@@ -32,7 +32,7 @@ namespace TrvxTask.Data.Repositories
             return _entities.SingleOrDefault(x => x.Id == id);
         }
 
-        public void Insert(T entity)
+        public void Create(T entity)
         {
             if (entity == null)
             {
@@ -77,7 +77,7 @@ namespace TrvxTask.Data.Repositories
             return await _entities.SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task InsertAsync(T entity)
+        public async Task CreateAsync(T entity)
         {
             if (entity == null)
             {

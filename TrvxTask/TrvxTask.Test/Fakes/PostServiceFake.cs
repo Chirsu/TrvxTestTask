@@ -37,7 +37,7 @@ namespace TrvxTask.Test.Fakes
             return _posts.FirstOrDefault(x => x.Id == id);
         }
 
-        public async Task InsertAsync(Post post)
+        public async Task CreateAsync(Post post)
         {
             _posts.Add(post);
         }

@@ -10,7 +10,7 @@ namespace TrvxTask.Domain.Interfaces
     {
         IEnumerable<Post> GetAll();
         Task<Post> GetAsync(Guid id);
-        Task InsertAsync(Post post);
+        Task CreateAsync(Post post);
         Task UpdateAsync(Post post);
         Task DeleteAsync(Guid id);
     }

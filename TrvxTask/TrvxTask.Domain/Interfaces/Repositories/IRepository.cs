@@ -10,12 +10,12 @@ namespace TrvxTask.Domain.Interfaces.Repositories
     {
         IEnumerable<T> GetAll();
         T Get(Guid id);
-        void Insert(T entity);
+        void Create(T entity);
         void Update(T entity);
         void Delete(T entity);
         
         Task<T> GetAsync(Guid id);
-        Task InsertAsync(T entity);
+        Task CreateAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
     }

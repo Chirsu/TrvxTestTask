@@ -49,7 +49,7 @@ namespace TrvxTask.Api.Controllers
         public async Task<IActionResult> Post([FromBody]CommentModel model)
         {
             var comment = _mapper.Map<Comment>(model);
-            await _commentService.InsertAsync(comment);
+            await _commentService.CreateAsync(comment);
             return Ok();
         }
 

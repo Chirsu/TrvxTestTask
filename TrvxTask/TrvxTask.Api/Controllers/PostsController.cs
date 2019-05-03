@@ -49,7 +49,7 @@ namespace TrvxTask.Api.Controllers
         public async Task<IActionResult> Post([FromBody]PostModel model)
         {
             var post = _mapper.Map<Post>(model);
-            await _postService.InsertAsync(post);
+            await _postService.CreateAsync(post);
             return Ok();
         }
 

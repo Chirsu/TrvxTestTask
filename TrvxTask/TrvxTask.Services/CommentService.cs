@@ -31,9 +31,9 @@ namespace TrvxTask.Services
             return await _commentRepository.GetAsync(id);
         }
 
-        public async Task InsertAsync(Comment comment)
+        public async Task CreateAsync(Comment comment)
         {
-            await _commentRepository.InsertAsync(comment);
+            await _commentRepository.CreateAsync(comment);
         }
 
         public async Task UpdateAsync(Comment comment)

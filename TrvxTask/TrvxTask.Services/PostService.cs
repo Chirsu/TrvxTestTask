@@ -31,9 +31,9 @@ namespace TrvxTask.Services
             return await _postRepository.GetAsync(id);
         }
 
-        public async Task InsertAsync(Post post)
+        public async Task CreateAsync(Post post)
         {
-            await _postRepository.InsertAsync(post);
+            await _postRepository.CreateAsync(post);
         }
 
         public async Task UpdateAsync(Post post)
