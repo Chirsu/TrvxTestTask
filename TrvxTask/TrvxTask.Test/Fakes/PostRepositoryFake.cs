@@ -5,16 +5,17 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using TrvxTask.Domain.Entities;
-using TrvxTask.Domain.Interfaces;
+using TrvxTask.Domain.Interfaces.Repositories;
+
 #pragma warning disable 1998
 
 namespace TrvxTask.Test.Fakes
 {
-    internal class PostServiceFake : IPostService
+    internal class PostRepositoryFake : IPostRepository
     {
         private readonly List<Post> _posts;
 
-        public PostServiceFake()
+        public PostRepositoryFake()
         {
             _posts = new List<Post>()
             {
@@ -30,6 +31,27 @@ namespace TrvxTask.Test.Fakes
         public IEnumerable<Post> GetAll()
         {
             return _posts;
+        }
+
+        public Post Get(Guid id)
+        {
+            return _posts.FirstOrDefault(x => x.Id == id);
+        }
+
+        public void Create(Post post)
+        {
+            _posts.Add(post);
+        }
+
+        public void Update(Post post)
+        {
+            _posts.RemoveAll(x => x.Id == post.Id);
+            _posts.Add(post);
+        }
+
+        public void Delete(Post post)
+        {
+            _posts.RemoveAll(x => x.Id == post.Id);
         }
 
         public async Task<Post> GetAsync(Guid id)
@@ -48,9 +70,9 @@ namespace TrvxTask.Test.Fakes
             _posts.Add(post);
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Post post)
         {
-            _posts.RemoveAll(x => x.Id == id);
+            _posts.RemoveAll(x => x.Id == post.Id);
         }
     }
 }

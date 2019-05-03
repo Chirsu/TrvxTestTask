@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -10,6 +11,8 @@ using TrvxTask.Api.MappingProfiles;
 using TrvxTask.Api.Models;
 using TrvxTask.Domain.Entities;
 using TrvxTask.Domain.Interfaces;
+using TrvxTask.Domain.Interfaces.Repositories;
+using TrvxTask.Services;
 using TrvxTask.Test.Fakes;
 
 namespace TrvxTask.Test
@@ -17,44 +20,37 @@ namespace TrvxTask.Test
     [TestClass]
     public class PostControllerTest
     {
-        private readonly PostsController _controller;
         private readonly IPostService _service;
 
         public PostControllerTest()
         {
-            var profile = new PostProfile();
-            var configuration = new MapperConfiguration(cfg => cfg.AddProfile(profile));
-            var mapper = new Mapper(configuration);
-
-            _service = new PostServiceFake();
-            _controller = new PostsController(mapper, _service);
+            var repository = new PostRepositoryFake();
+            _service = new PostService(repository);
         }
 
         [TestMethod]
         public void Get_WhenCalled_ReturnsOkResult()
         {
-            var result = _controller.Get();
+            var result = _service.GetAll();
             
-            Assert.IsTrue(result is OkObjectResult);
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
         public void Get_WhenCalled_ReturnsAllItems()
         {
-            var result = _controller.Get() as OkObjectResult;
+            var result = _service.GetAll();
 
             Assert.IsNotNull(result);
-            var items = result.Value as List<PostModel>;
-            Assert.IsNotNull(items);
-            Assert.AreEqual(3, items.Count);
+            Assert.AreEqual(3, result.Count());
         }
 
         [TestMethod]
         public async Task GetById_UnknownGuidPassed_ReturnsNotFoundResult()
         {
-            var result = await _controller.Get(Guid.NewGuid());
+            var result = await _service.GetAsync(Guid.NewGuid());
             
-            Assert.IsTrue(result is NotFoundResult);
+            Assert.IsNull(result);
         }
 
         [TestMethod]
@@ -62,9 +58,9 @@ namespace TrvxTask.Test
         {
             var testGuid = new Guid("ab2bd817-98cd-4cf3-a80a-53ea0cd9c200");
             
-            var result = await _controller.Get(testGuid);
+            var result = await _service.GetAsync(testGuid);
             
-            Assert.IsTrue(result is OkObjectResult);
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
@@ -72,11 +68,10 @@ namespace TrvxTask.Test
         {
             var testGuid = new Guid("ab2bd817-98cd-4cf3-a80a-53ea0cd9c200");
             
-            var result = await _controller.Get(testGuid) as OkObjectResult;
+            var result = await _service.GetAsync(testGuid);
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Value is PostModel);
-            Assert.AreEqual(testGuid, (result.Value as PostModel).Id);
+            Assert.AreEqual(testGuid, result.Id);
         }
     }
 }
